@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+interface PropFactory{
+    +createProp(AbstractAircraft enemyAircraft)
+}
+
+class BoombPropFactory{
+    + createProp(AbstractAircraft enemyAircraft);
+}
+
+class FirePropFactory{
+    + createProp(AbstractAircraft enemyAircraft);
+}
+class HpPropFactory{
+    + createProp(AbstractAircraft enemyAircraft);
+}
+
+PropFactory <|.. BoombPropFactory
+PropFactory <|.. FirePropFactory
+PropFactory <|.. HpPropFactory
+
+abstract class BaseProp {
+    + BaseProp(int locationX, int locationY, int speedX, int speedY) {
+            super(locationX, locationY, speedX, speedY)
+    + {abstract} shoot():List<BaseProp>
+}
+
+class BoombProp{
+    + BoombProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + function():void
+}
+
+class FireProp{
+    + FireProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + function():void
+}
+
+class HpProp{
+    + HpProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + function():void
+}
+
+BaseProp <|-- BoombProp
+BaseProp <|-- FireProp
+BaseProp <|-- HpProp
+
+BoombPropFactory --> BoombProp
+FirePropFactory --> FireProp
+HpPropFactory --> HpProp
+
+@enduml

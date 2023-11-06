@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class HeroAircraft {
+    - OnlyHeroAircraft()
+    + getOnlyHeroAircraft()
+    - shootNum:int
+    - power:int
+    - direction:int
+    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+}
+
+
+
+HeroAircraft <|-- HeroAircraft
+
+@enduml

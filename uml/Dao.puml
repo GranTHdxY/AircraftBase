@@ -1,0 +1,36 @@
+@startuml
+
+interface AircraftWarRankDao{
+    - List<PlayerScore> playerScores;
+    - String rankTable;
+    - File file(rankTable);
+    + getAllScores():List<PlayerScore>;
+    + doAdd(PlayerScore PlayerScores):void;
+}
+
+class AircraftWarRanklmpl{
+    + getAllScores():List<PlayerScore>;
+    + doAdd(PlayerScore PlayerScores):void;
+    + writeFile(List<PlayerScore> playerScores):void;
+    + readFile():void;
+    + clearFile():void;
+}
+
+
+class PlayerScore{
+    - String PlayerName;
+    - int score;
+    - String time;
+    + PlayerScore(String PlayerName, int score, String time)
+    +  getPlayerName():String;
+    +  getScore():int;
+    +  getTime():String;
+    }
+
+class Game{
+    printTable(int score, String userName):void;
+}
+AircraftWarRankDao <|.. AircraftWarRanklmpl
+AircraftWarRanklmpl --> PlayerScore
+Game ..> AircraftWarRankDao
+@enduml

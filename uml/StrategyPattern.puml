@@ -1,0 +1,45 @@
+@startuml
+
+interface Strategy{
+    + shootWay(AbstractAircraft abstractAircraft):List<BaseBullet>
+}
+
+class straightLineShoot{
+    + shootWay(AbstractAircraft abstractAircraft):List<BaseBullet>
+}
+
+class scatterShoot{
+    + shootWay(AbstractAircraft abstractAircraft):List<BaseBullet>
+}
+
+Strategy <|.. scatterShoot
+Strategy <|.. straightLineShoot
+
+abstract class AbstractAircraft
+{
+	# maxHp:int
+    # hp:int
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + decreaseHp(int decrease):void
+    + increaseHp(int increase):void
+    + getHp():int
+    + {abstract} shoot():List<BaseBullet>
+    class Context()
+}
+
+class Context{
+    + Context(Strategy strategy):void;
+    + setStrategy(Strategy strategy):void;
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>;
+
+}
+
+AbstractAircraft o--> Context
+
+
+Context o--> Strategy
+
+class Game{}
+
+Game --> AbstractAircraft
+@enduml

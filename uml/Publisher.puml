@@ -1,0 +1,88 @@
+@startuml
+class BoombFunc
+{
+
+    - List<AbstractFlyingObject> VictimList
+    +  addViewer(AbstractFlyingObject abstractFlyingObject):void
+    +  removeViewer(AbstractFlyingObject abstractFlyingObject):void
+    + void Notify():void
+    + Boom():void
+}
+
+class BoombProp{
+    + BoombProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + function():void
+}
+
+abstract class AbstractFlyingObject
+{
+    # locationX:int
+    # locationY:int
+    # speedX:int
+    # speedY:int
+    # image:BufferedImage
+    # width:int
+    # height:int
+    # isValid:boolean
+
+    + AbstractFlyingObject(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + crash(AbstractFlyingObject flyingObject):boolean
+    + setLocation(double locationX, double locationY):void
+    + getLocationX():int
+    + getLocationY():int
+    + getSpeedY():int
+    + getImage():BufferedImage
+    + getWidth():int
+    + getHeight():int
+    + notValid():boolean
+    + vanish():void
+    + update():void
+}
+
+class MobEnemy {
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + update():void
+}
+
+
+
+class EliteAircraft{
+    - shootNum:int
+    - power:int
+    - direction:int
+    + EliteAircraft(int locationX, int locationY, int speedX, int speedY, int power)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + update():void
+}
+
+class BossEnemy{
+    - shootNum:int
+    - power:int
+    - direction:int
+    + EliteAircraft(int locationX, int locationY, int speedX, int speedY, int power)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + getDirection():int
+    + getShootNum():int
+    + update():void
+}
+
+class EnemyBullet{
+    + EnemyBullet(int locationX, int locationY, int speedX, int speedY, int power)
+    + update():void
+}
+
+
+AbstractFlyingObject <|-- MobEnemy
+AbstractFlyingObject <|-- EliteAircraft
+AbstractFlyingObject <|-- BossEnemy
+AbstractFlyingObject <|-- EnemyBullet
+BoombFunc o--> AbstractFlyingObject
+BoombProp ..> BoombFunc
+
+@enduml
